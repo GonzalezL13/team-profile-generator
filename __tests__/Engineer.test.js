@@ -9,5 +9,5 @@ test("create and engineer object", () => {
 test("getRole() returns as 'Engineer", () => {
     const engineer = new Engineer("Luis", 100, "luisg@fake.com", "Gon13");
 
-    expect(engineer.getRole()).toEqual(expect.any(String))
+    expect(engineer.getRole()).toBe("Engineer")
 });

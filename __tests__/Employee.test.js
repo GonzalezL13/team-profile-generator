@@ -11,5 +11,6 @@ test("creates an employee object", () => {
 test("getRole() returns as 'Employee", () => {
     const employee = new Employee("Luis", 100, "luisg@fake.com");
 
-    expect(employee.getRole()).toEqual(expect.any(String))
+    expect(employee.getRole()).toBe("Employee")
 });
+
