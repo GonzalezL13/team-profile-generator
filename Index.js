@@ -221,7 +221,7 @@ function startApp() {
     }
 
     function buildTeam() {
-        fs.writeFile(teamTemplate, answers, (err) => {
+        fs.writeFile("./dist/team.html", teamTemplate(employeesArray), (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });
