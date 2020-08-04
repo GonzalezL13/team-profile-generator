@@ -31,12 +31,8 @@ function startApp() {
                 name: "managerId",
                 message: "What is the manager's id?",
                 validate: managerIdInput => {
-                    if (managerIdInput) {
-                        return true;
-                    } else {
-                        console.log("Please enter manager's ID!");
-                        return false;
-                    }
+                    var valid = !isNaN(parseFloat(managerIdInput));
+                    return valid || 'Please enter a number';
                 }
             },
 
@@ -59,12 +55,8 @@ function startApp() {
                 name: "managerOfficeNumber",
                 message: "What is the manager's office number?",
                 validate: officeNumber => {
-                    if (officeNumber) {
-                        return true;
-                    } else {
-                        console.log("Please enter manager's office number!");
-                        return false;
-                    }
+                    var valid = !isNaN(parseFloat(officeNumber));
+                    return valid || 'Please enter a number';
                 }
             }
         ]).then(answers => {
@@ -91,26 +83,144 @@ function startApp() {
         ]).then(userChoice => {
             switch (userChoice.teamMember) {
                 case "Engineer":
-                    addEngineer();
+                    createEngineer();
                     break;
                 case "Intern":
-                    addIntern();
+                    createIntern();
                     break;
                 default:
                     buildTeam();
             }
         });
-
     }
 
     //add engineer function with prompts
+    function createEngineer() {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "engineerName",
+                message: "What is the engineer's name?",
+                validate: engName => {
+                    if (engName) {
+                        return true;
+                    } else {
+                        console.log("Please enter engineer's name!")
+                        return false;
+                    }
+                }
+            },
 
+            {
+                type: "input",
+                name: "engineerId",
+                message: "What is the engineer's id?",
+                validate: engineerIdInput => {
+                    var valid = !isNaN(parseFloat(engineerIdInput));
+                    return valid || 'Please enter a number';
+                }
+            },
+
+            {
+                type: "input",
+                name: "engineerEmail",
+                message: "What is the engineer's email?",
+                validate: engineerEmailInput => {
+                    if (engineerEmailInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter engineer's email!");
+                        return false;
+                    }
+                }
+            },
+
+            {
+                type: "input",
+                name: "engineerGithub",
+                message: "What is the engineer's GitHub username?",
+                validate: engineerGithubInput => {
+                    if (engineerGithubInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter engineer's GitHub username!");
+                        return false;
+                    }
+                }
+            },
+        ]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            employeesArray.push(engineer);
+            idArray.push(answers.engineerId);
+            createTeam();
+        });
+    }
 
 
     //add intern function with prompts
+    function createIntern() {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "internName",
+                message: "What is the intern's name?",
+                validate: internNameInput => {
+                    if (internNameInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter intern's name!")
+                        return false;
+                    }
+                }
+            },
 
+            {
+                type: "input",
+                name: "internId",
+                message: "What is the intern's id?",
+                validate: internIdInput => {
+                    var valid = !isNaN(parseFloat(internIdInput));
+                    return valid || 'Please enter a number';
+                }
+            },
 
+            {
+                type: "input",
+                name: "internEmail",
+                message: "What is the intern's email?",
+                validate: internEmailInput => {
+                    if (internEmailInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter intern's email!");
+                        return false;
+                    }
+                }
+            },
 
+            {
+                type: "input",
+                name: "internSchool",
+                message: "What is the intern's school?",
+                validate: internSchoolInput => {
+                    if (internSchoolInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter intern's school!");
+                        return false;
+                    }
+                }
+            }
+        ]).then(answers => {
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+            employeesArray.push(intern);
+            idArray.push(answers.internId);
+            createTeam();
+        });
+    }
+         
+
+        
 
 
 
