@@ -2,7 +2,8 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 const inquirer = require("inquirer");
-
+const fs = require("fs");
+const teamTemplate = require("./src/page-template");
 
 const employeesArray = [];
 const idArray = [];
@@ -218,17 +219,20 @@ function startApp() {
             createTeam();
         });
     }
-         
 
-        
-
-
-
-
-    createManager();
-
-}
+    function buildTeam() {
+        fs.writeFile(teamTemplate, answers, (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+    }
 
 
-startApp();
+
+        createManager();
+
+    }
+
+
+    startApp();
 
